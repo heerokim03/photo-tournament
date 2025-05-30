@@ -1,78 +1,57 @@
 import React, { useState } from 'react';
+import './App.css';
+import { motion } from 'framer-motion';
 
-const PhotoTournament = () => {
-  const initialPhotos = [
-    { id: 1, url: '/images/photo1.png', title: '임시 제목 1' },
-    { id: 2, url: '/images/photo2.png', title: '임시 제목 2' },
-    { id: 3, url: '/images/photo3.png', title: '임시 제목 3' },
-    { id: 4, url: '/images/photo4.png', title: '임시 제목 4' },
-    { id: 5, url: '/images/photo5.png', title: '임시 제목 5' },
-    { id: 6, url: '/images/photo6.png', title: '임시 제목 6' },
-    { id: 7, url: '/images/photo7.png', title: '임시 제목 7' },
-    { id: 8, url: '/images/photo8.png', title: '임시 제목 8' },
-    { id: 9, url: '/images/photo9.png', title: '임시 제목 9' },
-    { id: 10, url: '/images/photo10.png', title: '임시 제목 10' },
-    { id: 11, url: '/images/photo11.png', title: '임시 제목 11' },
-    { id: 12, url: '/images/photo12.png', title: '임시 제목 12' },
-    { id: 13, url: '/images/photo13.png', title: '임시 제목 13' },
-    { id: 14, url: '/images/photo14.png', title: '임시 제목 14' },
-    { id: 15, url: '/images/photo15.png', title: '임시 제목 15' },
-    { id: 16, url: '/images/photo16.png', title: '임시 제목 16' },
-  ];
+const images = [
+  '/images/photo1.png', '/images/photo2.png', '/images/photo3.png', '/images/photo4.png',
+  '/images/photo5.png', '/images/photo6.png', '/images/photo7.png', '/images/photo8.png',
+  '/images/photo9.png', '/images/photo10.png', '/images/photo11.png', '/images/photo12.png',
+  '/images/photo13.png', '/images/photo14.png', '/images/photo15.png', '/images/photo16.png'
+];
 
-  const [photos, setPhotos] = useState(initialPhotos);
-  const [round, setRound] = useState(1);
-  const [winners, setWinners] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
+function App() {
+  const [currentRound, setCurrentRound] = useState(images);
+  const [nextRound, setNextRound] = useState([]);
+  const [index, setIndex] = useState(0);
 
-  const handleSelect = (winner) => {
-    const nextWinners = [...winners, winner];
-    if (nextWinners.length === Math.ceil(photos.length / 2)) {
-      if (nextWinners.length === 1) {
-        alert(`최종 우승: ${winner.title}`);
-        resetTournament();
+  const handleClick = (winner) => {
+    setNextRound([...nextRound, winner]);
+    if (index + 2 >= currentRound.length) {
+      if (nextRound.length + 1 === 1) {
+        alert(`최종 우승 사진!`);
       } else {
-        setPhotos(nextWinners);
-        setWinners([]);
-        setCurrentIndex(0);
-        setRound(round + 1);
+        setCurrentRound([...nextRound, winner]);
+        setNextRound([]);
+        setIndex(0);
       }
     } else {
-      setWinners(nextWinners);
-      setCurrentIndex(currentIndex + 2);
+      setIndex(index + 2);
     }
   };
 
-  const resetTournament = () => {
-    setPhotos(initialPhotos);
-    setWinners([]);
-    setCurrentIndex(0);
-    setRound(1);
-  };
-
-  const pair = photos.slice(currentIndex, currentIndex + 2);
-
   return (
-    <div className="p-4 text-center">
-      <h1 className="text-2xl mb-4">사진 토너먼트 - {round} 라운드</h1>
-      <div className="grid grid-cols-2 gap-4">
-        {pair.map((photo) => (
-          <div
-            key={photo.id}
-            className="cursor-pointer border rounded-2xl shadow p-2 hover:scale-105 transition"
-            onClick={() => handleSelect(photo)}
-          >
-            <img
-              src={photo.url}
-              alt={photo.title}
-              className="w-full h-64 object-cover rounded-2xl"
-            />
-            <p className="mt-2">{photo.title}</p>
-          </div>
-        ))}
+    <div style={{ width: '100vw', height: '100vh', background: 'linear-gradient(135deg, #1e1e2f, #2e2e3f)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+      <h1 style={{ color: '#fff', fontSize: '3rem', marginBottom: '2rem', fontFamily: 'sans-serif' }}>📸 사진 이상형 월드컵</h1>
+      <div style={{ display: 'flex', width: '1920px', height: '1080px', justifyContent: 'space-between', gap: '20px' }}>
+        <motion.img
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          src={currentRound[index]}
+          alt="left"
+          style={{ width: '49%', height: '100%', objectFit: 'cover', cursor: 'pointer', border: '6px solid #fff', borderRadius: '20px', boxShadow: '0 0 20px rgba(255, 255, 255, 0.4)' }}
+          onClick={() => handleClick(currentRound[index])}
+        />
+        <motion.img
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          src={currentRound[index + 1]}
+          alt="right"
+          style={{ width: '49%', height: '100%', objectFit: 'cover', cursor: 'pointer', border: '6px solid #fff', borderRadius: '20px', boxShadow: '0 0 20px rgba(255, 255, 255, 0.4)' }}
+          onClick={() => handleClick(currentRound[index + 1])}
+        />
       </div>
     </div>
   );
-};
+}
 
-export default PhotoTournament;
+export default App;
