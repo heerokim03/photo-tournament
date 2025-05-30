@@ -1,17 +1,3 @@
-import React, { useState } from 'react';
-import Intro from './Intro';
-import Tournament from './Tournament';
-
-export default function App() {
-  const [started, setStarted] = useState(false);
-
-  return (
-    <div>
-      {started ? <Tournament /> : <Intro onStart={() => setStarted(true)} />}
-    </div>
-  );
-}
-
 // src/Intro.jsx
 import React from 'react';
 import './App.css';
