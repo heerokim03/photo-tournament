@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import './App.css';
 
 const images = Array.from({ length: 16 }, (_, i) => `/images/photo${i + 1}.png`);
 
