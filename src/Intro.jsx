@@ -1,6 +1,4 @@
-// src/Intro.jsx
 import React from "react";
-
 export default function Intro({ onStart }) {
   return (
     <div className="intro-bg">

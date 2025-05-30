@@ -1,8 +1,6 @@
-// src/App.jsx
 import React, { useState } from "react";
 import Intro from "./Intro";
-// (아래에 기존 Tournament 컴포넌트 import)
-
+import Tournament from "./Tournament";
 import "./App.css";
 
 function App() {
@@ -13,11 +11,9 @@ function App() {
       {isIntro ? (
         <Intro onStart={() => setIsIntro(false)} />
       ) : (
-        // 기존 Tournament 컴포넌트로 교체!
         <Tournament />
       )}
     </>
   );
 }
-
 export default App;
