@@ -1,10 +1,45 @@
-/* App.css (간단한 스타일용) */
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
-  background-color: #1e1e2f;
-  h1, h2, .round-title {
+  background: linear-gradient(135deg, #ffffff, #f9f9f9);
   font-family: 'Bangers', sans-serif;
 }
+
+h1, h2, .round-title {
+  font-family: 'Bangers', sans-serif;
+  color: #333;
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  padding: 40px;
+}
+
+img.photo {
+  width: 40vw;
+  height: auto;
+  border: 4px solid gold;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+img.photo:hover {
+  transform: scale(1.05);
+}
+
+.vs-icon {
+  font-size: 4rem;
+  color: gold;
+}
+
+.final-winner {
+  border: 8px solid gold;
+  padding: 20px;
+  background: #fffbe6;
+  border-radius: 30px;
 }
