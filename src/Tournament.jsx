@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const images = Array.from({ length: 16 }, (_, i) => `/images/photo${i + 1}.jpg`);
+const images = Array.from({ length: 16 }, (_, i) => `/images/photo${i + 1}.png`);
 const roundNames = {
   16: { bg: "/images/bg16.png", label: "16강" },
   8:  { bg: "/images/bg8.png",  label: "8강" },
