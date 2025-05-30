@@ -46,7 +46,14 @@ function App() {
   };
 
   return (
-    <div style={{ width: '100vw', height: '100vh', background: 'linear-gradient(135deg, #1e1e2f, #2e2e3f)', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
+    <div style={{ width: '100vw', height: '100vh', background: 'radial-gradient(circle at center, #0f2027, #203a43, #2c5364)', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden', fontFamily: 'Montserrat, sans-serif' }}>
+      {/* 좌측 상단 고정 로고 */}
+      <img
+        src="/images/logo.png"
+        alt="뉴스인 로고"
+        style={{ position: 'absolute', top: '20px', left: '20px', width: '80px', height: 'auto', zIndex: 20 }}
+      />
+
       <AnimatePresence>
         {showRoundTitle && (
           <motion.div
@@ -54,54 +61,60 @@ function App() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, scale: [0.5, 1.2, 1] }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 1.5 }}
-            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.8)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10 }}
+            transition={{ duration: 1.2 }}
+            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10 }}
           >
-            <h1 style={{ color: '#ffeb3b', fontSize: '8rem', fontWeight: '900', fontFamily: 'Arial Black, sans-serif', textShadow: '0 0 60px rgba(255,255,0,0.9)' }}>{getRoundTitle(currentRound.length)}</h1>
+            <h1 style={{ color: '#ffffff', fontSize: '7rem', fontWeight: '700', fontFamily: 'Montserrat, sans-serif', letterSpacing: '2px', textTransform: 'uppercase', textShadow: '0 0 40px rgba(255,255,255,0.8)' }}>{getRoundTitle(currentRound.length)}</h1>
           </motion.div>
         )}
       </AnimatePresence>
 
-      <h1 style={{ color: '#fff', fontSize: '2.5rem', position: 'absolute', top: '20px' }}>대선 판을 흔든 순간! 월드컵!</h1>
+      <h1 style={{ color: '#ffffff', fontSize: '2rem', position: 'absolute', top: '20px', right: '20px', fontWeight: '600', letterSpacing: '1px' }}>대선 판을 흔든 순간! 월드컵!</h1>
 
       {winner ? (
         <motion.div
           initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1, rotate: [0, 10, -10, 0], boxShadow: '0 0 100px rgba(255, 255, 0, 0.8)' }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1.5 }}
+          animate={{ opacity: 1, scale: 1, rotate: [0, 5, -5, 0], boxShadow: '0 0 80px rgba(255, 215, 0, 0.8)' }}
+          transition={{ duration: 1.2 }}
           style={{ textAlign: 'center' }}
         >
-          <h2 style={{ color: '#ffeb3b', fontSize: '5rem', marginBottom: '1rem', fontWeight: '900', fontFamily: 'Arial Black, sans-serif' }}>🏆 최종 우승! 🏆</h2>
+          <h2 style={{ color: '#ffd700', fontSize: '4rem', marginBottom: '1rem', fontWeight: '700', letterSpacing: '1px' }}>🏆 최종 우승! 🏆</h2>
           <img
             src={winner}
             alt="winner"
-            style={{ width: '60vw', height: 'auto', border: '10px solid gold', borderRadius: '20px', boxShadow: '0 0 50px gold' }}
+            style={{ width: '50vw', height: 'auto', border: '8px solid #ffd700', borderRadius: '16px', boxShadow: '0 0 40px rgba(255, 215, 0, 0.8)' }}
           />
         </motion.div>
       ) : (
-        <div style={{ display: 'flex', width: '100vw', height: '80vh', alignItems: 'center', justifyContent: 'center', gap: '20px' }}>
+        <div style={{ display: 'flex', width: '100vw', height: '75vh', alignItems: 'center', justifyContent: 'center', gap: '40px' }}>
           <motion.img
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.95 }}
             src={currentRound[index]}
             alt="left"
-            style={{ width: '45%', height: '100%', objectFit: 'cover', cursor: 'pointer', border: '6px solid #fff', borderRadius: '20px', boxShadow: '0 0 30px rgba(255, 255, 255, 0.5)' }}
+            style={{ width: '40%', height: '100%', objectFit: 'cover', cursor: 'pointer', border: '4px solid #ffffff', borderRadius: '16px', boxShadow: '0 0 20px rgba(255, 255, 255, 0.6)', transition: 'all 0.3s ease-in-out' }}
             onClick={() => handleClick(currentRound[index])}
           />
 
-          <img
-            src="/images/vs.png"
-            alt="vs"
-            style={{ width: '80px', height: '80px' }}
-          />
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+            style={{ width: '80px', height: '80px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+          >
+            <img
+              src="/images/vs.png"
+              alt="vs"
+              style={{ width: '100%', height: '100%' }}
+            />
+          </motion.div>
 
           <motion.img
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.95 }}
             src={currentRound[index + 1]}
             alt="right"
-            style={{ width: '45%', height: '100%', objectFit: 'cover', cursor: 'pointer', border: '6px solid #fff', borderRadius: '20px', boxShadow: '0 0 30px rgba(255, 255, 255, 0.5)' }}
+            style={{ width: '40%', height: '100%', objectFit: 'cover', cursor: 'pointer', border: '4px solid #ffffff', borderRadius: '16px', boxShadow: '0 0 20px rgba(255, 255, 255, 0.6)', transition: 'all 0.3s ease-in-out' }}
             onClick={() => handleClick(currentRound[index + 1])}
           />
         </div>
