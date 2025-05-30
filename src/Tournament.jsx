@@ -1,87 +1,62 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react';
+import './App.css';
 
 const images = Array.from({ length: 16 }, (_, i) => `/images/photo${i + 1}.png`);
-const roundNames = {
-  16: { bg: "/images/bg16.png", label: "16강" },
-  8:  { bg: "/images/bg8.png",  label: "8강" },
-  4:  { bg: "/images/bg4.png",  label: "4강" },
-  2:  { bg: "/images/bg2.png",  label: "결승" },
-};
-
-function shuffle(array) {
-  let a = array.slice();
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
 
 export default function Tournament() {
   const [currentRound, setCurrentRound] = useState(16);
-  const [candidates, setCandidates] = useState(shuffle(images));
+  const [candidates, setCandidates] = useState([]);
   const [nextRound, setNextRound] = useState([]);
   const [index, setIndex] = useState(0);
   const [winner, setWinner] = useState(null);
 
+  useEffect(() => {
+    setCandidates(shuffle(images));
+  }, []);
+
+  function shuffle(array) {
+    let a = array.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function handleSelect(selection) {
+    const selected = candidates[index + selection];
+    setNextRound([...nextRound, selected]);
+
+    if (index + 2 >= candidates.length) {
+      if (nextRound.length + 1 === 1) {
+        setWinner(selected);
+      } else {
+        setCandidates(nextRound.concat(selected));
+        setNextRound([]);
+        setIndex(0);
+        setCurrentRound(currentRound / 2);
+      }
+    } else {
+      setIndex(index + 2);
+    }
+  }
+
   if (winner) {
     return (
-      <div
-        className="tournament-bg"
-        style={{ backgroundImage: `url(${roundNames[2].bg})` }}
-      >
-        <div className="winner-wrap">
-          <img src={winner} alt="우승" className="tournament-image" />
-          <div className="winner-title">최종 우승</div>
-        </div>
+      <div className="stage-container">
+        <h1 className="stage-title">🏆 최종 우승자!</h1>
+        <img src={winner} alt="Winner" className="winner-image" />
       </div>
     );
   }
 
-  if (index >= candidates.length) {
-    if (candidates.length === 1) {
-      setWinner(candidates[0]);
-    } else {
-      setCandidates(nextRound);
-      setNextRound([]);
-      setIndex(0);
-      setCurrentRound(candidates.length / 2);
-    }
-    return null;
-  }
-
-  const left = candidates[index];
-  const right = candidates[index + 1];
-
   return (
-    <div
-      className="tournament-bg"
-      style={{ backgroundImage: `url(${roundNames[currentRound].bg})` }}
-    >
-      <div className="round-label">
-        <img src={roundNames[currentRound].bg} alt="라운드 인서트" className="round-image" />
-        <div className="round-title">{roundNames[currentRound].label}</div>
-      </div>
-      <div className="tournament-row">
-        <img
-          src={left}
-          alt="후보1"
-          className="tournament-image"
-          onClick={() => {
-            setNextRound([...nextRound, left]);
-            setIndex(index + 2);
-          }}
-        />
+    <div className="stage-container">
+      <h2 className="stage-title">{currentRound}강</h2>
+      <div className="matchup">
+        <img src={candidates[index]} alt="Option 1" className="photo" onClick={() => handleSelect(0)} />
         <div className="vs-text">VS</div>
-        <img
-          src={right}
-          alt="후보2"
-          className="tournament-image"
-          onClick={() => {
-            setNextRound([...nextRound, right]);
-            setIndex(index + 2);
-          }}
-        />
+        <img src={candidates[index + 1]} alt="Option 2" className="photo" onClick={() => handleSelect(1)} />
       </div>
     </div>
   );
