@@ -1,5 +1,3 @@
-// ✅ React 코드 업데이트: 사진 크기 화면에 꽉 차게 조정 + 라운드 타이틀 애니메이션 유지
-
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -59,7 +57,7 @@ function App() {
             transition={{ duration: 1.5 }}
             style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.8)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10 }}
           >
-            <h1 style={{ color: '#ffeb3b', fontSize: '8rem', textShadow: '0 0 60px rgba(255,255,0,0.9)' }}>{getRoundTitle(currentRound.length)}</h1>
+            <h1 style={{ color: '#ffeb3b', fontSize: '8rem', fontWeight: '900', fontFamily: 'Arial Black, sans-serif', textShadow: '0 0 60px rgba(255,255,0,0.9)' }}>{getRoundTitle(currentRound.length)}</h1>
           </motion.div>
         )}
       </AnimatePresence>
@@ -74,28 +72,28 @@ function App() {
           transition={{ duration: 1.5 }}
           style={{ textAlign: 'center' }}
         >
-          <h2 style={{ color: '#ffeb3b', fontSize: '5rem', marginBottom: '1rem' }}>🏆 최종 우승! 🏆</h2>
+          <h2 style={{ color: '#ffeb3b', fontSize: '5rem', marginBottom: '1rem', fontWeight: '900', fontFamily: 'Arial Black, sans-serif' }}>🏆 최종 우승! 🏆</h2>
           <img
             src={winner}
             alt="winner"
-            style={{ width: '70vw', height: 'auto', border: '10px solid gold', borderRadius: '20px', boxShadow: '0 0 50px gold' }}
+            style={{ width: '60vw', height: 'auto', border: '10px solid gold', borderRadius: '20px', boxShadow: '0 0 50px gold' }}
           />
         </motion.div>
       ) : (
-        <div style={{ display: 'flex', width: '100vw', height: '90vh', alignItems: 'center', justifyContent: 'center', gap: '20px' }}>
+        <div style={{ display: 'flex', width: '100vw', height: '80vh', alignItems: 'center', justifyContent: 'center', gap: '20px' }}>
           <motion.img
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             src={currentRound[index]}
             alt="left"
-            style={{ width: '48%', height: '100%', objectFit: 'cover', cursor: 'pointer', border: '6px solid #fff', borderRadius: '20px', boxShadow: '0 0 30px rgba(255, 255, 255, 0.5)' }}
+            style={{ width: '45%', height: '100%', objectFit: 'cover', cursor: 'pointer', border: '6px solid #fff', borderRadius: '20px', boxShadow: '0 0 30px rgba(255, 255, 255, 0.5)' }}
             onClick={() => handleClick(currentRound[index])}
           />
 
           <img
             src="/images/vs.png"
             alt="vs"
-            style={{ width: '100px', height: '100px' }}
+            style={{ width: '80px', height: '80px' }}
           />
 
           <motion.img
@@ -103,7 +101,7 @@ function App() {
             whileTap={{ scale: 0.95 }}
             src={currentRound[index + 1]}
             alt="right"
-            style={{ width: '48%', height: '100%', objectFit: 'cover', cursor: 'pointer', border: '6px solid #fff', borderRadius: '20px', boxShadow: '0 0 30px rgba(255, 255, 255, 0.5)' }}
+            style={{ width: '45%', height: '100%', objectFit: 'cover', cursor: 'pointer', border: '6px solid #fff', borderRadius: '20px', boxShadow: '0 0 30px rgba(255, 255, 255, 0.5)' }}
             onClick={() => handleClick(currentRound[index + 1])}
           />
         </div>
