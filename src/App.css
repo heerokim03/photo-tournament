@@ -9,7 +9,7 @@ body, html {
   background-color: #fffbe6;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .app {
@@ -18,6 +18,19 @@ body, html {
   position: relative;
   background-color: #fffbe6;
   overflow: hidden;
+}
+
+.main-title {
+  position: absolute;
+  top: -50px; /* 💥 프레임 바깥 상단 */
+  width: 100%;
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  background: black;
+  color: white;
+  padding: 10px 0;
+  z-index: 40;
 }
 
 .pair-container {
@@ -45,14 +58,14 @@ body, html {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 6rem;
-  background: linear-gradient(45deg, #ff416c, #ff4b2b);
+  font-size: 7rem;
   color: white;
-  padding: 15px 40px;
-  border-radius: 50%;
-  border: 4px solid white;
-  z-index: 10;
-  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  text-shadow:
+    -2px -2px 0 #000,
+    2px -2px 0 #000,
+    -2px 2px 0 #000,
+    2px 2px 0 #000;
+  z-index: 20;
 }
 
 .round-overlay {
@@ -101,25 +114,27 @@ body, html {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  width: 1920px;
+  height: 1080px;
   background-color: gold;
 }
 
 .winner-image {
-  width: 350px;
-  height: auto;
-  object-fit: contain;
-  border-radius: 20px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
 }
 
 .restart-button {
-  margin-top: 20px;
-  padding: 12px 25px;
-  font-size: 1.2rem;
+  position: absolute;
+  bottom: 50px;
+  padding: 15px 30px;
+  font-size: 1.5rem;
   background-color: black;
   color: white;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
   cursor: pointer;
 }
 
@@ -127,7 +142,7 @@ body, html {
   background-color: #333;
 }
 
-/* 💥 모바일 세로용 */
+/* 모바일 */
 @media (max-width: 768px) {
   .app {
     width: 100%;
@@ -145,12 +160,11 @@ body, html {
   .candidate img {
     width: 100%;
     height: auto;
-    max-height: 40vh; /* 한 화면에 다 들어오도록 */
-    object-fit: cover;
+    max-height: 40vh;
   }
   .vs-text {
     position: relative;
-    font-size: 2.5rem;
+    font-size: 3rem;
     margin: 10px 0;
     transform: none;
     top: auto;

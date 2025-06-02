@@ -21,21 +21,21 @@ function App() {
   const [clickedId, setClickedId] = useState(null);
 
   useEffect(() => {
+    if (finalWinner) {
+      confetti({
+        particleCount: 300,
+        spread: 160,
+        origin: { y: 0.6 }
+      });
+    }
+  }, [finalWinner]);
+
+  useEffect(() => {
     if (!showIntro) {
       const timer = setTimeout(() => setShowRoundOverlay(false), 1000);
       return () => clearTimeout(timer);
     }
   }, [showIntro, round]);
-
-  useEffect(() => {
-    if (round === 2 && !finalWinner) {
-      confetti({
-        particleCount: 200,
-        spread: 120,
-        origin: { y: 0.6 }
-      });
-    }
-  }, [round, finalWinner]);
 
   const handleSelect = (winner) => {
     setClickedId(winner.id);
@@ -82,6 +82,9 @@ function App() {
 
   return (
     <div className={`app ${round === 2 ? 'final-round' : ''}`}>
+      <div className="main-title">
+        대선 판을 바꾼 순간! 월드컵!
+      </div>
       {showRoundOverlay && (
         <div className="round-overlay">
           {round}강
