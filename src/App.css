@@ -162,32 +162,33 @@ body, html {
   width: 100%;
   max-width: 1920px;
   max-height: 1080px;
+  flex-wrap: nowrap;
   overflow: hidden;
 }
 
 .top-winner-item {
-  flex: 1;
-  max-width: 30%;
-  margin: 10px;
+  flex: 1 1 0;
+  max-width: 25%;
+  margin: 5px;
   text-align: center;
 }
 
 .top-winner-item img {
   width: 100%;
   height: auto;
-  max-height: 250px;
+  max-height: 200px;
   object-fit: contain;
   border: 2px solid #333;
   border-radius: 10px;
 }
 
 .top-winner-item h3 {
-  font-size: 2rem;
-  margin: 10px 0;
+  font-size: 1.4rem;
+  margin: 5px 0;
 }
 
 .top-winner-item p {
-  font-size: 1.8rem;
+  font-size: 1.2rem;
   margin: 5px 0;
 }
 
@@ -256,14 +257,16 @@ body, html {
   }
 
   .winner-title {
-    font-size: 2rem;
+    font-size: 2.5rem;            /* 💥 폰트 깨짐 방지 */
     padding: 0 10px;
+    word-break: keep-all;         /* 💥 단어 잘림 방지 */
+    text-align: center;
   }
 
   .winner-image {
-    width: 110%;
+    width: 100%;
     height: auto;
-    max-height: 80vh;
+    max-height: 60vh;
   }
 
   .restart-button,
@@ -293,5 +296,12 @@ body, html {
 
   .top-winner-item img {
     max-height: 200px;
+  }
+
+  .top-winner-item h3,
+  .top-winner-item p {
+    font-size: 1.4rem;
+    word-break: keep-all;         /* 💥 폰트 깨짐 방지 */
+    text-align: center;
   }
 }
