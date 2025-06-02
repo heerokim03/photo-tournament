@@ -6,7 +6,6 @@ import confetti from 'canvas-confetti';
 
 const initialCandidates = Array.from({ length: 16 }, (_, i) => ({
   id: i + 1,
-  name: `후보 ${i + 1}`,
   image: `/images/candidate${i + 1}.jpg`,
 }));
 
@@ -81,13 +80,13 @@ function App() {
   const currentPair = candidates.slice(currentIndex, currentIndex + 2);
 
   return (
-    <div className={`app ${round === 2 ? 'final-round' : ''}`}>
-      <div className="main-title">
-        대선 판을 바꾼 순간! 월드컵!
-      </div>
+    <div className="app">
       {showRoundOverlay && (
         <div className="round-overlay">
-          {round}강
+          {round === 16 && '16강'}
+          {round === 8 && '8강'}
+          {round === 4 && '4강'}
+          {round === 2 && '결승'}
         </div>
       )}
       <div className="pair-container">
@@ -97,7 +96,7 @@ function App() {
             className="candidate"
             onClick={() => handleSelect(candidate)}
           >
-            <img src={candidate.image} alt={candidate.name} />
+            <img src={candidate.image} alt={`후보 ${candidate.id}`} />
           </div>
         ))}
         <div className="vs-text">VS</div>
