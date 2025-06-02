@@ -178,7 +178,7 @@ body, html {
   100% { opacity: 0; visibility: hidden; }
 }
 
-/* 모바일 */
+/* 💥 모바일 전용 */
 @media (max-width: 768px) {
   .pair-container {
     flex-direction: column;
@@ -186,27 +186,53 @@ body, html {
     align-items: center;
     position: relative;
   }
+
   .candidate {
     width: 90%;
     margin: 5px 0;
   }
+
   .candidate img {
     width: 93%;
     height: auto;
     max-height: 47vh;
     object-fit: contain;
   }
+
   .vs-image img {
-    width: 120px;
+    width: 140px;
     margin: 10px 0;
   }
+
   .intro-logo {
     width: 150px;
   }
+
   .intro-title {
     font-size: 2.5rem;
   }
+
   .round-overlay {
     font-size: 5rem;
+  }
+
+  .winner-title {
+    font-size: 2rem;
+    text-align: center;
+    top: 20px;
+    padding: 0 10px;
+  }
+
+  .winner-image {
+    width: 110%;
+    height: auto;
+    max-height: 80vh;
+    object-fit: contain;
+  }
+
+  .restart-button {
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    bottom: 30px;
   }
 }
