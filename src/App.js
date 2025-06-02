@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import Intro from './Intro';
 import Winner from './Winner';
+import confetti from 'canvas-confetti';
 
 const initialCandidates = Array.from({ length: 16 }, (_, i) => ({
   id: i + 1,
@@ -25,6 +26,16 @@ function App() {
       return () => clearTimeout(timer);
     }
   }, [showIntro, round]);
+
+  useEffect(() => {
+    if (round === 2 && !finalWinner) {
+      confetti({
+        particleCount: 200,
+        spread: 120,
+        origin: { y: 0.6 }
+      });
+    }
+  }, [round, finalWinner]);
 
   const handleSelect = (winner) => {
     setClickedId(winner.id);
@@ -70,7 +81,7 @@ function App() {
   const currentPair = candidates.slice(currentIndex, currentIndex + 2);
 
   return (
-    <div className={`app ${showRoundBanner ? 'round-transition' : ''}`}>
+    <div className={`app ${showRoundBanner ? 'round-transition' : ''} ${round === 2 ? 'final-round' : ''}`}>
       <div className="top-bar">
         <h1>대선 판을 바꾼 순간! 월드컵!</h1>
       </div>
