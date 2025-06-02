@@ -82,20 +82,23 @@ function App() {
 
   return (
     <div className={`app ${round === 2 ? 'final-round' : ''}`}>
+      <div className="top-bar">
+        <h1>대선 판을 바꾼 순간! 월드컵!</h1>
+      </div>
+
       {showRoundOverlay && (
         <div className="round-overlay">
           {round}강
         </div>
       )}
       <div className="pair-container">
-        {currentPair.map((candidate, index) => (
+        {currentPair.map((candidate) => (
           <div
             key={candidate.id}
             className="candidate"
             onClick={() => handleSelect(candidate)}
           >
             <img src={candidate.image} alt={candidate.name} />
-            <p>{candidate.name}</p>
           </div>
         ))}
         <div className="vs-text">VS</div>

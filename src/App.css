@@ -20,6 +20,18 @@ body, html {
   overflow: hidden;
 }
 
+.top-bar {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  background-color: black;
+  color: white;
+  padding: 10px 0;
+  text-align: center;
+  font-size: 2rem;
+  z-index: 30;
+}
+
 .pair-container {
   display: flex;
   width: 100%;
@@ -29,11 +41,9 @@ body, html {
 .candidate {
   flex: 1;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .candidate img {
@@ -42,31 +52,19 @@ body, html {
   object-fit: cover;
 }
 
-.candidate:hover {
-  transform: scale(1.02);
-}
-
-.candidate p {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-top: 10px;
-  background: rgba(0, 0, 0, 0.6);
-  color: white;
-  padding: 5px 10px;
-  border-radius: 10px;
-}
-
 .vs-text {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 5rem;
-  background: black;
+  font-size: 6rem;
+  background: linear-gradient(45deg, #ff416c, #ff4b2b);
   color: white;
-  padding: 10px 30px;
+  padding: 15px 40px;
   border-radius: 50%;
+  border: 4px solid white;
   z-index: 10;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
 }
 
 .round-overlay {
@@ -79,9 +77,9 @@ body, html {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 5rem;
+  font-size: 6rem;
   font-weight: bold;
-  z-index: 20;
+  z-index: 50;
   opacity: 1;
   animation: fadeOut 1s forwards;
 }
@@ -91,20 +89,52 @@ body, html {
   100% { opacity: 0; visibility: hidden; }
 }
 
-@media (max-width: 768px) {
-  .app {
-    width: 100%;
-    height: auto;
-  }
-  .pair-container {
-    flex-direction: column;
-  }
-  .candidate img {
-    height: auto;
-  }
-  .vs-text {
-    position: relative;
-    transform: none;
-    margin: 15px 0;
-  }
+.intro-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #fffbe6;
+}
+
+.intro-logo {
+  width: 150px; /* 💥 기존의 절반 크기 */
+  margin-bottom: 20px;
+}
+
+.intro-title {
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+.winner-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: gold;
+}
+
+.winner-image {
+  width: 350px;
+  height: auto;
+  object-fit: contain;
+  border-radius: 20px;
+}
+
+.restart-button {
+  margin-top: 20px;
+  padding: 12px 25px;
+  font-size: 1.2rem;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.restart-button:hover {
+  background-color: #333;
 }
