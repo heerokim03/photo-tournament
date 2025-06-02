@@ -265,4 +265,37 @@ body, html {
   margin: 10px 0;
   object-fit: contain;
 }
+.top-winner-list {
+  display: flex;
+  flex-direction: row;       /* 💥 가로로 배치 */
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;           /* 💥 너무 좁으면 줄바꿈 허용 */
+  width: 100%;
+}
+
+.top-winner-item {
+  margin: 20px;
+  text-align: center;
+  max-width: 300px;          /* 💥 각 아이템 최대 너비 */
+}
+
+.top-winner-item img {
+  width: 100%;
+  height: auto;
+  max-height: 300px;         /* 💥 세로 최대 높이 제한 */
+  object-fit: contain;       /* 💥 잘리지 않게 */
+  border: 3px solid #333;
+  border-radius: 10px;
+}
+
+.top-winner-item h3 {
+  font-size: 2rem;           /* 💥 순위 폰트 크게 */
+  margin: 10px 0;
+}
+
+.top-winner-item p {
+  font-size: 1.8rem;         /* 💥 우승 횟수 폰트 크게 */
+  margin: 5px 0;
+}
 }
