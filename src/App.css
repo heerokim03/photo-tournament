@@ -71,7 +71,6 @@ body, html {
   align-items: center;
   font-size: 10rem;
   font-weight: bold;
-  font-family: 'Cafe24Ssurround', sans-serif;
   color: #333;
   z-index: 100;
   opacity: 1;
@@ -92,8 +91,6 @@ body, html {
 }
 
 .winner-title {
-  position: absolute;
-  top: 30px;
   font-size: 4rem;
   font-weight: bold;
   color: black;
@@ -102,6 +99,7 @@ body, html {
     3px -3px 0 #fff,
     -3px 3px 0 #fff,
     3px 3px 0 #fff;
+  margin-bottom: 20px;
 }
 
 .winner-image {
@@ -155,7 +153,45 @@ body, html {
   word-break: keep-all;
 }
 
-/* 애니메이션 */
+/* Top Winners Section */
+.top-winner-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1920px;
+  max-height: 1080px;
+  overflow: hidden;
+}
+
+.top-winner-item {
+  flex: 1;
+  max-width: 30%;
+  margin: 10px;
+  text-align: center;
+}
+
+.top-winner-item img {
+  width: 100%;
+  height: auto;
+  max-height: 250px;
+  object-fit: contain;
+  border: 2px solid #333;
+  border-radius: 10px;
+}
+
+.top-winner-item h3 {
+  font-size: 2rem;
+  margin: 10px 0;
+}
+
+.top-winner-item p {
+  font-size: 1.8rem;
+  margin: 5px 0;
+}
+
+/* Animations */
 .animate-fade {
   animation: fadeIn 1s ease;
 }
@@ -185,13 +221,10 @@ body, html {
   100% { opacity: 0; visibility: hidden; }
 }
 
-/* 모바일 */
+/* Mobile */
 @media (max-width: 768px) {
   .pair-container {
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
   }
 
   .candidate {
@@ -203,7 +236,6 @@ body, html {
     width: 93%;
     height: auto;
     max-height: 47vh;
-    object-fit: contain;
   }
 
   .vs-image img {
@@ -225,8 +257,6 @@ body, html {
 
   .winner-title {
     font-size: 2rem;
-    text-align: center;
-    top: 20px;
     padding: 0 10px;
   }
 
@@ -234,68 +264,34 @@ body, html {
     width: 110%;
     height: auto;
     max-height: 80vh;
-    object-fit: contain;
   }
 
   .restart-button,
   .top-winner-button {
     font-size: 1.2rem;
     padding: 10px 20px;
-    bottom: 30px;
   }
 
   .restart-button:active,
   .top-winner-button:active {
     transform: scale(0.85);
   }
+
+  /* 💥 모바일에서는 top1만 보여줌 */
   .top-winner-list {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+    flex-direction: column;
+    align-items: center;
+  }
 
-.top-winner-item {
-  margin: 20px 0;
-  text-align: center;
-}
+  .top-winner-item {
+    max-width: 90%;
+  }
 
-.top-winner-item img {
-  width: 300px;
-  max-width: 80%;
-  margin: 10px 0;
-  object-fit: contain;
-}
-.top-winner-list {
-  display: flex;
-  flex-direction: row;       /* 💥 가로로 배치 */
-  justify-content: center;
-  align-items: flex-start;
-  flex-wrap: wrap;           /* 💥 너무 좁으면 줄바꿈 허용 */
-  width: 100%;
-}
+  .top-winner-item:nth-child(n + 2) {
+    display: none;
+  }
 
-.top-winner-item {
-  margin: 20px;
-  text-align: center;
-  max-width: 300px;          /* 💥 각 아이템 최대 너비 */
-}
-
-.top-winner-item img {
-  width: 100%;
-  height: auto;
-  max-height: 300px;         /* 💥 세로 최대 높이 제한 */
-  object-fit: contain;       /* 💥 잘리지 않게 */
-  border: 3px solid #333;
-  border-radius: 10px;
-}
-
-.top-winner-item h3 {
-  font-size: 2rem;           /* 💥 순위 폰트 크게 */
-  margin: 10px 0;
-}
-
-.top-winner-item p {
-  font-size: 1.8rem;         /* 💥 우승 횟수 폰트 크게 */
-  margin: 5px 0;
-}
+  .top-winner-item img {
+    max-height: 200px;
+  }
 }

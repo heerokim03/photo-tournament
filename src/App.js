@@ -49,7 +49,7 @@ function App() {
 
   useEffect(() => {
     if (!showIntro) {
-      const timer = setTimeout(() => setShowRoundOverlay(false), 1500);
+      const timer = setTimeout(() => setShowRoundOverlay(false), 1000);
       return () => clearTimeout(timer);
     }
   }, [showIntro, round]);
