@@ -191,9 +191,9 @@ body, html {
     margin: 5px 0;
   }
   .candidate img {
-    width: 90%;
+    width: 93%;
     height: auto;
-    max-height: 45vh;
+    max-height: 47vh;
     object-fit: contain;
   }
   .vs-image img {
