@@ -20,18 +20,6 @@ body, html {
   overflow: hidden;
 }
 
-.top-bar {
-  position: absolute;
-  top: 0;
-  width: 100%;
-  background-color: black;
-  color: white;
-  padding: 10px 0;
-  text-align: center;
-  font-size: 2rem;
-  z-index: 30;
-}
-
 .pair-container {
   display: flex;
   width: 100%;
@@ -99,7 +87,7 @@ body, html {
 }
 
 .intro-logo {
-  width: 150px; /* 💥 기존의 절반 크기 */
+  width: 150px;
   margin-bottom: 20px;
 }
 
@@ -137,4 +125,35 @@ body, html {
 
 .restart-button:hover {
   background-color: #333;
+}
+
+/* 💥 모바일 세로용 */
+@media (max-width: 768px) {
+  .app {
+    width: 100%;
+    height: auto;
+  }
+  .pair-container {
+    flex-direction: column;
+    max-width: 100%;
+    height: auto;
+  }
+  .candidate {
+    width: 100%;
+    margin: 5px 0;
+  }
+  .candidate img {
+    width: 100%;
+    height: auto;
+    max-height: 40vh; /* 한 화면에 다 들어오도록 */
+    object-fit: cover;
+  }
+  .vs-text {
+    position: relative;
+    font-size: 2.5rem;
+    margin: 10px 0;
+    transform: none;
+    top: auto;
+    left: auto;
+  }
 }

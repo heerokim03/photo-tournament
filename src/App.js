@@ -82,10 +82,6 @@ function App() {
 
   return (
     <div className={`app ${round === 2 ? 'final-round' : ''}`}>
-      <div className="top-bar">
-        <h1>대선 판을 바꾼 순간! 월드컵!</h1>
-      </div>
-
       {showRoundOverlay && (
         <div className="round-overlay">
           {round}강
