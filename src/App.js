@@ -21,8 +21,8 @@ function App() {
 
   useEffect(() => {
     if (!showIntro) {
-      const bannerTimer = setTimeout(() => setShowRoundBanner(false), 1000);
-      return () => clearTimeout(bannerTimer);
+      const timer = setTimeout(() => setShowRoundBanner(false), 1000);
+      return () => clearTimeout(timer);
     }
   }, [showIntro, round]);
 
@@ -46,7 +46,7 @@ function App() {
         setCurrentIndex(currentIndex + 2);
       }
       setClickedId(null);
-    }, 400); // 애니메이션 시간과 맞춤
+    }, 400);
   };
 
   const resetGame = () => {
@@ -70,7 +70,7 @@ function App() {
   const currentPair = candidates.slice(currentIndex, currentIndex + 2);
 
   return (
-    <div className="app">
+    <div className={`app round-${round}`}>
       <div className="top-bar">
         <h1>대선 판을 바꾼 순간! 월드컵!</h1>
       </div>

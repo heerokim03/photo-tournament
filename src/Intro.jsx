@@ -3,7 +3,7 @@ import './App.css';
 
 function Intro({ onStart }) {
   useEffect(() => {
-    const timer = setTimeout(onStart, 3000); // 3초 후 메인 화면으로
+    const timer = setTimeout(onStart, 3000);
     return () => clearTimeout(timer);
   }, [onStart]);
 
