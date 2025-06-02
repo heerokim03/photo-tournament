@@ -56,7 +56,7 @@ body, html {
 }
 
 .vs-image img {
-  width: 300px;
+  width: 400px;
 }
 
 .round-overlay {
@@ -191,13 +191,13 @@ body, html {
     margin: 5px 0;
   }
   .candidate img {
-    width: 80%;
+    width: 85%;
     height: auto;
-    max-height: 35vh;
+    max-height: 40vh;
     object-fit: contain;
   }
   .vs-image img {
-    width: 110px;
+    width: 120px;
     margin: 10px 0;
   }
   .intro-logo {
