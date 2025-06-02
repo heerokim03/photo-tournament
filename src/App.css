@@ -24,20 +24,24 @@ body, html {
 }
 
 .pair-container {
-  display: flex;
+  position: relative;
   width: 100%;
   height: 100%;
-  justify-content: center;
-  align-items: center;
-  position: relative;
 }
 
 .candidate {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
+  position: absolute;
+  width: 45%;
+  height: 80%;
+  transition: transform 0.4s ease, opacity 0.4s ease, z-index 0.4s ease;
+}
+
+.candidate:nth-child(1) {
+  left: 0;
+}
+
+.candidate:nth-child(2) {
+  right: 0;
 }
 
 .candidate img {
@@ -46,14 +50,34 @@ body, html {
   object-fit: contain;
 }
 
+.candidate.winner {
+  z-index: 2;
+  transform: translateX(0);
+}
+
+.candidate.loser-left {
+  z-index: 1;
+  transform: translateX(-120%);
+  opacity: 0;
+}
+
+.candidate.loser-right {
+  z-index: 1;
+  transform: translateX(120%);
+  opacity: 0;
+}
+
 .vs-image {
   position: absolute;
-  z-index: 20;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
   animation: pulse 1s infinite alternate;
 }
 
 .vs-image img {
-  width: 300px; /* 데스크탑 기본 크기 */
+  width: 300px;
 }
 
 .round-overlay {
@@ -175,27 +199,18 @@ body, html {
   100% { opacity: 0; visibility: hidden; }
 }
 
-/* 💥 모바일 전용 */
+/* 모바일 */
 @media (max-width: 768px) {
-  .pair-container {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-  }
   .candidate {
-    width: 90%;
-    margin: 5px 0;
-  }
-  .candidate img {
     width: 80%;
     height: auto;
-    max-height: 35vh;
-    object-fit: contain;
+    position: relative;
+    margin: 5px 0;
+    transform: none !important;
+    opacity: 1 !important;
   }
   .vs-image img {
-    width: 110px; /* 모바일용 더 작은 크기 */
-    position: relative;
+    width: 110px;
     margin: 10px 0;
   }
   .intro-logo {

@@ -18,6 +18,8 @@ function App() {
   const [winners, setWinners] = useState([]);
   const [finalWinner, setFinalWinner] = useState(null);
   const [clickedId, setClickedId] = useState(null);
+  const [loserSide, setLoserSide] = useState(null);
+  const [vsKey, setVsKey] = useState(0);
 
   useEffect(() => {
     if (finalWinner) {
@@ -37,7 +39,14 @@ function App() {
   }, [showIntro, round]);
 
   const handleSelect = (winner) => {
+    const loser = candidates[currentIndex].id === winner.id
+      ? candidates[currentIndex + 1]
+      : candidates[currentIndex];
+
+    const loserDirection = winner.id === candidates[currentIndex].id ? 'right' : 'left';
+
     setClickedId(winner.id);
+    setLoserSide(loserDirection);
 
     setTimeout(() => {
       const newWinners = [...winners, winner];
@@ -56,6 +65,8 @@ function App() {
         setCurrentIndex(currentIndex + 2);
       }
       setClickedId(null);
+      setLoserSide(null);
+      setVsKey((prev) => prev + 1);
     }, 400);
   };
 
@@ -67,6 +78,7 @@ function App() {
     setFinalWinner(null);
     setShowIntro(true);
     setShowRoundOverlay(true);
+    setVsKey(0);
   };
 
   if (showIntro) {
@@ -96,16 +108,26 @@ function App() {
         </div>
       )}
       <div className="pair-container">
-        {currentPair.map((candidate) => (
-          <div
-            key={candidate.id}
-            className="candidate"
-            onClick={() => handleSelect(candidate)}
-          >
-            <img src={candidate.image} alt={`후보 ${candidate.id}`} className="animate-fade" />
-          </div>
-        ))}
-        <div className="vs-image animate-pop">
+        {currentPair.map((candidate, index) => {
+          let className = 'candidate animate-fade';
+          if (clickedId) {
+            if (candidate.id === clickedId) {
+              className += ' winner';
+            } else {
+              className += loserSide === 'left' ? ' loser-left' : ' loser-right';
+            }
+          }
+          return (
+            <div
+              key={candidate.id}
+              className={className}
+              onClick={() => handleSelect(candidate)}
+            >
+              <img src={candidate.image} alt={`후보 ${candidate.id}`} />
+            </div>
+          );
+        })}
+        <div key={vsKey} className="vs-image animate-fade">
           <img src="/images/vs.png" alt="VS" />
         </div>
       </div>
