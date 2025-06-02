@@ -25,12 +25,11 @@ function TopWinners({ onBack }) {
     <div className="top-winner-list">
       {topWinners.map((item) => (
         <div key={item.id} className="top-winner-item">
-          <h3>{item.rank}</h3>
+<h3>{window.innerWidth <= 768 ? '최다 우승자 TOP 1' : item.rank}</h3>
           <img src={item.image} alt={`후보 ${item.id}`} />
           <p>{item.winCount}회 우승</p>
         </div>
       ))}
-      <button className="top-winner-button" onClick={onBack}>뒤로가기</button>
     </div>
   );
 }
