@@ -9,7 +9,7 @@ function Intro({ onStart }) {
 
   return (
     <div className="intro-screen">
-      <img src="/logo.jpg" alt="로고" className="intro-logo" />
+<img src="/images/logo.jpg" alt="로고" className="intro-logo" />
       <h1 className="intro-title">대선 판을 바꾼 순간! 월드컵!</h1>
     </div>
   );
