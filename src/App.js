@@ -12,7 +12,7 @@ const initialCandidates = Array.from({ length: 16 }, (_, i) => ({
 
 function App() {
   const [showIntro, setShowIntro] = useState(true);
-  const [showRoundBanner, setShowRoundBanner] = useState(true);
+  const [showRoundOverlay, setShowRoundOverlay] = useState(true);
   const [round, setRound] = useState(16);
   const [candidates, setCandidates] = useState(initialCandidates);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -22,7 +22,7 @@ function App() {
 
   useEffect(() => {
     if (!showIntro) {
-      const timer = setTimeout(() => setShowRoundBanner(false), 1000);
+      const timer = setTimeout(() => setShowRoundOverlay(false), 1000);
       return () => clearTimeout(timer);
     }
   }, [showIntro, round]);
@@ -50,7 +50,7 @@ function App() {
           setWinners([]);
           setCurrentIndex(0);
           setRound(round / 2);
-          setShowRoundBanner(true);
+          setShowRoundOverlay(true);
         }
       } else {
         setWinners(newWinners);
@@ -67,7 +67,7 @@ function App() {
     setRound(16);
     setFinalWinner(null);
     setShowIntro(true);
-    setShowRoundBanner(true);
+    setShowRoundOverlay(true);
   };
 
   if (showIntro) {
@@ -81,28 +81,17 @@ function App() {
   const currentPair = candidates.slice(currentIndex, currentIndex + 2);
 
   return (
-    <div className={`app ${showRoundBanner ? 'round-transition' : ''} ${round === 2 ? 'final-round' : ''}`}>
-      <div className="top-bar">
-        <h1>대선 판을 바꾼 순간! 월드컵!</h1>
-      </div>
-
-      {showRoundBanner && (
-        <div className="round-banner">
-          <h2>{round}강</h2>
+    <div className={`app ${round === 2 ? 'final-round' : ''}`}>
+      {showRoundOverlay && (
+        <div className="round-overlay">
+          {round}강
         </div>
       )}
-
       <div className="pair-container">
         {currentPair.map((candidate, index) => (
           <div
             key={candidate.id}
-            className={`candidate ${
-              clickedId === candidate.id
-                ? index === 0
-                  ? 'clicked-left'
-                  : 'clicked-right'
-                : ''
-            }`}
+            className="candidate"
             onClick={() => handleSelect(candidate)}
           >
             <img src={candidate.image} alt={candidate.name} />
