@@ -4,10 +4,41 @@ import Intro from './Intro';
 import Winner from './Winner';
 import confetti from 'canvas-confetti';
 
+const firebaseUrl = 'https://worldcup-tracker-default-rtdb.firebaseio.com';
+
 const initialCandidates = Array.from({ length: 16 }, (_, i) => ({
   id: i + 1,
   image: `/images/candidate${i + 1}.jpg`,
 }));
+
+function recordWinner(winnerId) {
+  fetch(`${firebaseUrl}/winners/${winnerId}.json`)
+    .then(res => res.json())
+    .then(count => {
+      const newCount = (count || 0) + 1;
+      fetch(`${firebaseUrl}/winners/${winnerId}.json`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newCount),
+      });
+    });
+}
+
+function fetchTopWinner() {
+  fetch(`${firebaseUrl}/winners.json`)
+    .then(res => res.json())
+    .then(data => {
+      let topId = null;
+      let maxCount = -1;
+      for (const [id, count] of Object.entries(data)) {
+        if (count > maxCount) {
+          maxCount = count;
+          topId = id;
+        }
+      }
+      alert(`지금까지 최다 우승자: 후보 ${topId} (${maxCount}회)`);
+    });
+}
 
 function App() {
   const [showIntro, setShowIntro] = useState(true);
@@ -24,8 +55,9 @@ function App() {
       confetti({
         particleCount: 500,
         spread: 200,
-        origin: { y: 0.6 }
+        origin: { y: 0.6 },
       });
+      recordWinner(finalWinner.id);
     }
   }, [finalWinner]);
 
@@ -76,6 +108,7 @@ function App() {
         <div className="winner-title">🏆 최종 우승자 🏆</div>
         <img src={finalWinner.image} alt="최종 우승자" className="winner-image animate-pop" />
         <button className="restart-button" onClick={resetGame}>다시 시작하기</button>
+        <button className="top-winner-button" onClick={fetchTopWinner}>최다 우승자 보기</button>
       </div>
     );
   }

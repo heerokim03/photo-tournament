@@ -110,9 +110,9 @@ body, html {
   object-fit: cover;
 }
 
-.restart-button {
-  position: absolute;
-  bottom: 50px;
+.restart-button,
+.top-winner-button {
+  margin: 10px;
   padding: 20px 40px;
   font-size: 2rem;
   background-color: black;
@@ -120,10 +120,17 @@ body, html {
   border: none;
   border-radius: 15px;
   cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
-.restart-button:hover {
+.restart-button:hover,
+.top-winner-button:hover {
   background-color: #333;
+}
+
+.restart-button:active,
+.top-winner-button:active {
+  transform: scale(0.9);
 }
 
 .intro-screen {
@@ -178,7 +185,7 @@ body, html {
   100% { opacity: 0; visibility: hidden; }
 }
 
-/* 💥 모바일 전용 */
+/* 모바일 */
 @media (max-width: 768px) {
   .pair-container {
     flex-direction: column;
@@ -230,9 +237,15 @@ body, html {
     object-fit: contain;
   }
 
-  .restart-button {
+  .restart-button,
+  .top-winner-button {
     font-size: 1.2rem;
     padding: 10px 20px;
     bottom: 30px;
+  }
+
+  .restart-button:active,
+  .top-winner-button:active {
+    transform: scale(0.85);
   }
 }
