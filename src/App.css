@@ -166,8 +166,6 @@ body, html {
   max-height: 1080px;
   flex-wrap: nowrap;
   overflow: hidden;
-  transform: scale(2);          /* 💥 PC: 2배 확대 */
-  transform-origin: center;
 }
 
 .top-winner-item {
@@ -180,19 +178,14 @@ body, html {
 .top-winner-item img {
   width: 100%;
   height: auto;
-  max-height: 200px;
+  max-height: 300px;
   object-fit: contain;
   border: 2px solid #333;
   border-radius: 10px;
 }
 
-.top-winner-item h3 {
-  font-size: 1.8rem;
-  margin: 10px 0;
-}
-
 .top-winner-item p {
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   margin: 5px 0;
 }
 
@@ -224,6 +217,14 @@ body, html {
 @keyframes fadeOut {
   0% { opacity: 1; }
   100% { opacity: 0; visibility: hidden; }
+}
+
+/* Desktop only scaling */
+@media (min-width: 769px) {
+  .top-winner-list {
+    transform: scale(2.5);          /* 💥 데스크탑에서만 2.5배 확대 */
+    transform-origin: center;
+  }
 }
 
 /* Mobile */
@@ -303,7 +304,6 @@ body, html {
     max-height: 200px;
   }
 
-  .top-winner-item h3,
   .top-winner-item p {
     font-size: 1.4rem;
     word-break: keep-all;
