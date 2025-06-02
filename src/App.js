@@ -105,7 +105,9 @@ function App() {
             <img src={candidate.image} alt={`후보 ${candidate.id}`} className="animate-fade" />
           </div>
         ))}
-        <div className="vs-text animate-pop">VS</div>
+        <div className="vs-image animate-pop">
+          <img src="/images/vs.png" alt="VS" />
+        </div>
       </div>
     </div>
   );
