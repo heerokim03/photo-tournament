@@ -248,4 +248,21 @@ body, html {
   .top-winner-button:active {
     transform: scale(0.85);
   }
+  .top-winner-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.top-winner-item {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.top-winner-item img {
+  width: 300px;
+  max-width: 80%;
+  margin: 10px 0;
+  object-fit: contain;
+}
 }

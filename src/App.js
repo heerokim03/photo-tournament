@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import Intro from './Intro';
 import Winner from './Winner';
+import TopWinners from './TopWinners';
 import confetti from 'canvas-confetti';
 
 const firebaseUrl = 'https://worldcup-tracker-default-rtdb.firebaseio.com';
@@ -24,24 +25,9 @@ function recordWinner(winnerId) {
     });
 }
 
-function fetchTopWinner() {
-  fetch(`${firebaseUrl}/winners.json`)
-    .then(res => res.json())
-    .then(data => {
-      let topId = null;
-      let maxCount = -1;
-      for (const [id, count] of Object.entries(data)) {
-        if (count > maxCount) {
-          maxCount = count;
-          topId = id;
-        }
-      }
-      alert(`지금까지 최다 우승자: 후보 ${topId} (${maxCount}회)`);
-    });
-}
-
 function App() {
   const [showIntro, setShowIntro] = useState(true);
+  const [showTopWinners, setShowTopWinners] = useState(false);
   const [showRoundOverlay, setShowRoundOverlay] = useState(true);
   const [round, setRound] = useState(16);
   const [candidates, setCandidates] = useState(initialCandidates);
@@ -96,20 +82,24 @@ function App() {
     setShowIntro(true);
     setShowRoundOverlay(true);
     setVsKey(0);
+    setShowTopWinners(false);
   };
 
   if (showIntro) {
     return <Intro onStart={() => setShowIntro(false)} />;
   }
 
+  if (showTopWinners) {
+    return <TopWinners onBack={() => setShowTopWinners(false)} />;
+  }
+
   if (finalWinner) {
     return (
-      <div className="winner-screen">
-        <div className="winner-title">🏆 최종 우승자 🏆</div>
-        <img src={finalWinner.image} alt="최종 우승자" className="winner-image animate-pop" />
-        <button className="restart-button" onClick={resetGame}>다시 시작하기</button>
-        <button className="top-winner-button" onClick={fetchTopWinner}>최다 우승자 보기</button>
-      </div>
+      <Winner
+        winner={finalWinner}
+        onRestart={resetGame}
+        onShowTopWinners={() => setShowTopWinners(true)}
+      />
     );
   }
 

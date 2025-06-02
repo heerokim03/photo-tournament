@@ -1,19 +1,12 @@
-import React, { useEffect } from 'react';
-import './App.css';
+import React from 'react';
 
-function Winner({ winner, onRestart }) {
-  useEffect(() => {
-    const audio = new Audio('/sounds/cheer.mp3');
-    audio.play();
-    return () => audio.pause();
-  }, []);
-
+function Winner({ winner, onRestart, onShowTopWinners }) {
   return (
     <div className="winner-screen">
-      <h1>🏆 최종 우승자 🏆</h1>
-      <img src={winner.image} alt={winner.name} className="winner-image" />
-      <h2>{winner.name}</h2>
+      <div className="winner-title">🏆 최종 우승자 🏆</div>
+      <img src={winner.image} alt="최종 우승자" className="winner-image animate-pop" />
       <button className="restart-button" onClick={onRestart}>다시 시작하기</button>
+      <button className="top-winner-button" onClick={onShowTopWinners}>최다 우승자 보기</button>
     </div>
   );
 }
