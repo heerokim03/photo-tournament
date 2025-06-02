@@ -17,8 +17,6 @@ function App() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [winners, setWinners] = useState([]);
   const [finalWinner, setFinalWinner] = useState(null);
-  const [clickedId, setClickedId] = useState(null);
-  const [loserSide, setLoserSide] = useState(null);
   const [vsKey, setVsKey] = useState(0);
 
   useEffect(() => {
@@ -39,35 +37,22 @@ function App() {
   }, [showIntro, round]);
 
   const handleSelect = (winner) => {
-    const loser = candidates[currentIndex].id === winner.id
-      ? candidates[currentIndex + 1]
-      : candidates[currentIndex];
-
-    const loserDirection = winner.id === candidates[currentIndex].id ? 'right' : 'left';
-
-    setClickedId(winner.id);
-    setLoserSide(loserDirection);
-
-    setTimeout(() => {
-      const newWinners = [...winners, winner];
-      if (currentIndex + 2 >= candidates.length) {
-        if (newWinners.length === 1) {
-          setFinalWinner(newWinners[0]);
-        } else {
-          setCandidates(newWinners);
-          setWinners([]);
-          setCurrentIndex(0);
-          setRound(round / 2);
-          setShowRoundOverlay(true);
-        }
+    const newWinners = [...winners, winner];
+    if (currentIndex + 2 >= candidates.length) {
+      if (newWinners.length === 1) {
+        setFinalWinner(newWinners[0]);
       } else {
-        setWinners(newWinners);
-        setCurrentIndex(currentIndex + 2);
+        setCandidates(newWinners);
+        setWinners([]);
+        setCurrentIndex(0);
+        setRound(round / 2);
+        setShowRoundOverlay(true);
       }
-      setClickedId(null);
-      setLoserSide(null);
-      setVsKey((prev) => prev + 1);
-    }, 400);
+    } else {
+      setWinners(newWinners);
+      setCurrentIndex(currentIndex + 2);
+    }
+    setVsKey((prev) => prev + 1);
   };
 
   const resetGame = () => {
@@ -108,25 +93,15 @@ function App() {
         </div>
       )}
       <div className="pair-container">
-        {currentPair.map((candidate, index) => {
-          let className = 'candidate animate-fade';
-          if (clickedId) {
-            if (candidate.id === clickedId) {
-              className += ' winner';
-            } else {
-              className += loserSide === 'left' ? ' loser-left' : ' loser-right';
-            }
-          }
-          return (
-            <div
-              key={candidate.id}
-              className={className}
-              onClick={() => handleSelect(candidate)}
-            >
-              <img src={candidate.image} alt={`후보 ${candidate.id}`} />
-            </div>
-          );
-        })}
+        {currentPair.map((candidate) => (
+          <div
+            key={candidate.id}
+            className="candidate animate-fade"
+            onClick={() => handleSelect(candidate)}
+          >
+            <img src={candidate.image} alt={`후보 ${candidate.id}`} />
+          </div>
+        ))}
         <div key={vsKey} className="vs-image animate-fade">
           <img src="/images/vs.png" alt="VS" />
         </div>

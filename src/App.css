@@ -24,47 +24,26 @@ body, html {
 }
 
 .pair-container {
-  position: relative;
+  display: flex;
   width: 100%;
   height: 100%;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 
 .candidate {
-  position: absolute;
-  width: 45%;
-  height: 80%;
-  transition: transform 0.4s ease, opacity 0.4s ease, z-index 0.4s ease;
-}
-
-.candidate:nth-child(1) {
-  left: 0;
-}
-
-.candidate:nth-child(2) {
-  right: 0;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
 
 .candidate img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-}
-
-.candidate.winner {
-  z-index: 2;
-  transform: translateX(0);
-}
-
-.candidate.loser-left {
-  z-index: 1;
-  transform: translateX(-120%);
-  opacity: 0;
-}
-
-.candidate.loser-right {
-  z-index: 1;
-  transform: translateX(120%);
-  opacity: 0;
 }
 
 .vs-image {
@@ -201,13 +180,21 @@ body, html {
 
 /* 모바일 */
 @media (max-width: 768px) {
+  .pair-container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
   .candidate {
+    width: 90%;
+    margin: 5px 0;
+  }
+  .candidate img {
     width: 80%;
     height: auto;
-    position: relative;
-    margin: 5px 0;
-    transform: none !important;
-    opacity: 1 !important;
+    max-height: 35vh;
+    object-fit: contain;
   }
   .vs-image img {
     width: 110px;
