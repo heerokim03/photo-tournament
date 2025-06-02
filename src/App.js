@@ -70,7 +70,7 @@ function App() {
   const currentPair = candidates.slice(currentIndex, currentIndex + 2);
 
   return (
-    <div className={`app round-${round}`}>
+    <div className={`app ${showRoundBanner ? 'round-transition' : ''}`}>
       <div className="top-bar">
         <h1>대선 판을 바꾼 순간! 월드컵!</h1>
       </div>
