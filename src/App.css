@@ -42,7 +42,7 @@ body, html {
 .candidate img {
   width: 100%;
   height: 100%;
-  object-fit: contain; /* 💥 원본 비율 유지, 크롭 방지 */
+  object-fit: contain;
 }
 
 .vs-text {
@@ -50,7 +50,7 @@ body, html {
   font-size: 10rem;
   font-weight: bold;
   color: white;
-  -webkit-text-stroke: 10px #ffcc00; /* 💥 흰글씨 + 진노랑 테두리 */
+  -webkit-text-stroke: 10px #ff0000;
   z-index: 20;
   animation: pulse 1s infinite alternate;
 }
@@ -67,7 +67,7 @@ body, html {
   align-items: center;
   font-size: 10rem;
   font-weight: bold;
-  font-family: 'Cafe24Ssurround', sans-serif; /* 💥 인트로 폰트와 동일 */
+  font-family: 'Cafe24Ssurround', sans-serif; /* 💥 폰트 통일 */
   color: #333;
   z-index: 100;
   opacity: 1;
@@ -141,6 +141,7 @@ body, html {
   font-size: 5rem;
   text-align: center;
   color: #333;
+  word-break: keep-all;
 }
 
 /* 애니메이션 */
@@ -179,28 +180,32 @@ body, html {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
   }
   .candidate {
     width: 90%;
     margin: 5px 0;
   }
   .candidate img {
-    width: 50%;
+    width: 60%;
     height: auto;
-    max-height: 40vh;
+    max-height: 35vh; /* 💥 더 여유 있게 줄임 */
     object-fit: contain;
   }
   .vs-text {
     position: relative;
-    font-size: 5rem;
+    font-size: 4rem; /* 💥 모바일용 작게 */
     margin: 10px 0;
     transform: none;
-    -webkit-text-stroke: 6px #ffcc00;
+    -webkit-text-stroke: 6px #ff0000;
   }
   .intro-logo {
-    width: 200px;
+    width: 150px; /* 💥 모바일에서 더 작게 */
   }
   .intro-title {
-    font-size: 3rem;
+    font-size: 2.5rem; /* 💥 모바일에서 한 줄에 들어가도록 */
+  }
+  .round-overlay {
+    font-size: 5rem; /* 💥 모바일용 라운드 알림 크기 */
   }
 }
