@@ -22,8 +22,8 @@ function App() {
   useEffect(() => {
     if (finalWinner) {
       confetti({
-        particleCount: 300,
-        spread: 160,
+        particleCount: 500,
+        spread: 200,
         origin: { y: 0.6 }
       });
     }
@@ -31,7 +31,7 @@ function App() {
 
   useEffect(() => {
     if (!showIntro) {
-      const timer = setTimeout(() => setShowRoundOverlay(false), 1000);
+      const timer = setTimeout(() => setShowRoundOverlay(false), 1500);
       return () => clearTimeout(timer);
     }
   }, [showIntro, round]);
@@ -74,7 +74,13 @@ function App() {
   }
 
   if (finalWinner) {
-    return <Winner winner={finalWinner} onRestart={resetGame} />;
+    return (
+      <div className="winner-screen">
+        <div className="winner-title">🏆 최종 우승자 🏆</div>
+        <img src={finalWinner.image} alt="최종 우승자" className="winner-image animate-pop" />
+        <button className="restart-button" onClick={resetGame}>다시 시작하기</button>
+      </div>
+    );
   }
 
   const currentPair = candidates.slice(currentIndex, currentIndex + 2);
@@ -82,7 +88,7 @@ function App() {
   return (
     <div className="app">
       {showRoundOverlay && (
-        <div className="round-overlay">
+        <div className="round-overlay animate-fade">
           {round === 16 && '16강'}
           {round === 8 && '8강'}
           {round === 4 && '4강'}
@@ -96,10 +102,10 @@ function App() {
             className="candidate"
             onClick={() => handleSelect(candidate)}
           >
-            <img src={candidate.image} alt={`후보 ${candidate.id}`} />
+            <img src={candidate.image} alt={`후보 ${candidate.id}`} className="animate-fade" />
           </div>
         ))}
-        <div className="vs-text">VS</div>
+        <div className="vs-text animate-pop">VS</div>
       </div>
     </div>
   );
