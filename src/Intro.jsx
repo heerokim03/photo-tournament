@@ -10,7 +10,7 @@ function Intro({ onStart }) {
   return (
     <div className="intro-screen">
       <img src="/images/logo.jpg" alt="로고" className="intro-logo" />
-      <h1 className="intro-title">대선 판을 바꾼 순간! 월드컵!</h1>
+    <h1 className="intro-title">2025 대선, 결정적 한 장면</h1>
     </div>
   );
 }
