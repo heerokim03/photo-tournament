@@ -10,7 +10,8 @@ function Intro({ onStart }) {
   return (
     <div className="intro-screen">
       <img src="/images/logo.jpg" alt="로고" className="intro-logo" />
-    <h1 className="intro-title">2025 대선, 결정적 한 장면</h1>
+      <h1 className="intro-title">2025 대선, 결정적 한 장면</h1>
+      <p className="intro-subtitle">제작: 시사IN</p> {/* 👉 추가된 부분 */}
     </div>
   );
 }

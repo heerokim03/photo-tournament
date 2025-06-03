@@ -147,6 +147,12 @@ body, html {
   word-break: keep-all;
 }
 
+.intro-subtitle {
+  font-size: 1rem;
+  color: #666;
+  margin-top: 10px;
+}
+
 /* Top Winners Section */
 .top-winner-list {
   display: flex;
@@ -257,6 +263,9 @@ body, html {
   .intro-title {
     font-size: 2.5rem;
   }
+.intro-subtitle {
+  font-size: 0.5rem;
+}
 
   .round-overlay {
     font-size: 5rem;
