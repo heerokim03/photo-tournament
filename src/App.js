@@ -5,13 +5,23 @@ import Winner from './Winner';
 import TopWinners from './TopWinners';
 import confetti from 'canvas-confetti';
 
+function shuffleArray(array) {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
 const firebaseUrl = 'https://worldcup-tracker-default-rtdb.firebaseio.com';
 
-const initialCandidates = Array.from({ length: 16 }, (_, i) => ({
-  id: i + 1,
-  image: `/images/candidate${i + 1}.jpg`,
-}));
-
+const initialCandidates = shuffleArray(
+  Array.from({ length: 16 }, (_, i) => ({
+    id: i + 1,
+    image: `/images/candidate${i + 1}.jpg`,
+  }))
+);
 function recordWinner(winnerId) {
   fetch(`${firebaseUrl}/winners/${winnerId}.json`)
     .then(res => res.json())
